@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CustomerApp.Domains;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+
 using CustomerApp.Models;
 
 
@@ -13,55 +15,99 @@ namespace CustomerApp.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
-        CustomerDomain domain = new CustomerDomain();
+        private readonly CustomerDBContext _context;
 
-
-        [HttpPost]
-        public IActionResult Post(Customers customer)
+        public CustomerController(CustomerDBContext context)
         {
-            domain.registerCustomer(customer);
-            return Ok("Added");
+            _context = context;
         }
 
-
+        // GET: api/Customers
         [HttpGet]
-        public IActionResult Get(Customers customer)
+        public async Task<ActionResult<IEnumerable<Customers>>> GetCustomers()
         {
-            return Ok(domain.customerLogin(customer));
-
+            return await _context.Customers.ToListAsync();
         }
 
+        // GET: api/Customers/5
         [HttpGet("{id}")]
-
-        public IActionResult GetById(int customerid)
+        public async Task<ActionResult<Customers>> GetCustomers(int id)
         {
-            using(var dbcontext=new CustomerDBContext())
-            {
-                Customers customer = new Customers();
+            var customers = await _context.Customers.FindAsync(id);
 
-                var result = dbcontext.Customers.Where(x => x.CustomerId == customer.CustomerId);
-                if(result != null)
+            if (customers == null)
+            {
+                return NotFound();
+            }
+
+            return customers;
+        }
+
+        // PUT: api/Customers/5
+      
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutCustomers(int id, Customers customers)
+        {
+            if (id != customers.CustomerId)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(customers).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!CustomersExists(id))
                 {
-                    return Ok(result);
+                    return NotFound();
                 }
                 else
                 {
-                    return Ok("Not found");
+                    throw;
                 }
             }
+
+            return NoContent();
         }
 
-
-        [HttpPut]
-        public IActionResult Put(Customers customer)
+        // POST: api/Customers
+      
+        [HttpPost]
+        public async Task<ActionResult<Customers>> PostCustomers(Customers customers)
         {
-            domain.updateCustomer(customer);
-            return Ok("Updated");
+            _context.Customers.Add(customers);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetCustomers", new { id = customers.CustomerId }, customers);
+        }
+
+        // DELETE: api/Customers/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Customers>> DeleteCustomers(int id)
+        {
+            var customers = await _context.Customers.FindAsync(id);
+            if (customers == null)
+            {
+                return NotFound();
+            }
+
+            _context.Customers.Remove(customers);
+            await _context.SaveChangesAsync();
+
+            return customers;
+        }
+
+        private bool CustomersExists(int id)
+        {
+            return _context.Customers.Any(e => e.CustomerId == id);
         }
 
 
-       
-        
+
 
     }
 }
