@@ -1,3 +1,8 @@
+<form [formGroup]="searchProductFormGroup">
+  <input class="search_input" placeholder="search product here.." formControlName="search" (keyup)="SearchProduct()">
+</form>
+
+
 <table class="table table-striped">
     <thead>
      <tr>

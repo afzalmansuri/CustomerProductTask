@@ -2,6 +2,7 @@ import { Component,OnInit } from '@angular/core';
 import{FormGroup ,FormBuilder} from '@angular/forms';
 import {Router} from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import{FormGroup,FormBuilder} from '@angular/forms';
 
 @Component({
   selector: 'app-listproduct',
@@ -9,15 +10,25 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./listproduct.component.css']
 })
 export class ListproductComponent implements OnInit {
+  
   product:any;
-  constructor(private router:Router,private http:HttpClient) { }
+  searchProductFormGroup:FormGroup;
+  
+  constructor(private formBuilder:FormBuilder,private router:Router,private http:HttpClient) { }
 
   ngOnInit(): void {
     this.http.get<any>('https://localhost:44303/api/Product').subscribe(res=>{
           
       this.product=res;   
-      
+
+
     });
+  
+    this.searchFormGroup=this.formBuilder.group({
+    search:'',
+    })
+
+
   }
 
 
@@ -30,6 +41,14 @@ export class ListproductComponent implements OnInit {
 
   }
 
+
+  SearchProduct()
+  {
+   this.http.post<any>('https://localhost:44303/api/Search',{productName:this.searchFormGroup.value.search}).subscribe(res=>{
+          console.log(res);
+          
+        });
+  }
 
 
 }
