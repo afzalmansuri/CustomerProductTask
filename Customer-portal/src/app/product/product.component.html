@@ -1,0 +1,71 @@
+<div class="container">
+
+<form [formGroup]="searchformGroup">
+    <div class="form-group mb-4">
+      
+      <input class="form-control mr-sm-3" type="text"  formControlName="searchtext"  (keyup)="SearchProduct()" placeholder="Search Products" >
+          
+    </div>
+    
+      <div class="form-group col-md-6">
+        
+          <select   class="form-control"  formControlName="filtertext"  >
+                 
+               <option *ngFor="let r of productstatus" >{{r.status}}</option>
+               
+          </select>
+  <button class="btn btn-primary" (click)="FilterProduct()">filter</button>
+  </div>
+  
+    </form>
+  
+   <div class="container">
+      <div class="">
+    <div class="col-md-6 ">
+  <table class="table">
+  
+    <thead>
+    <tr>
+      <th><h4>Product List</h4></th>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <th><button [routerLink]="'/addproduct'" class="btn btn-dark">Add Prodcut</button>
+  </th>
+    </tr>
+    
+    </thead>
+    
+  
+    
+      <tr>
+        <th scope="col">Product Id</th>
+        <th scope="col">Product Name</th>
+        <th scope="col">Product Brand</th>
+        <th scope="col">Product Price</th>
+        <th scope="col">Product Status</th>
+        
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+       
+      </tr>
+   
+    <tr *ngFor="let r of result ">
+      <td scope="col">{{r.productId}}</td>
+      <td scope="col">{{r.productName}}</td>
+      <td scope="col">{{r.brand}}</td>
+      <td scope="col">{{r.productPrice}}</td>
+      
+      <td scope="col">{{r.productStatus}}</td>
+      
+       <td><a [routerLink]="['/updateproduct',r.productId,r.productName,r.brand,r.productPrice,r.productStatus]"> <i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+       <td><button (click)="deleteProduct(r.productId)" ><i class="fa fa-trash" aria-hidden="true"></i></button></td>
+      
+    </tr>
+  </table>
+    </div>
+      </div></div>
+
+    </div>
+  

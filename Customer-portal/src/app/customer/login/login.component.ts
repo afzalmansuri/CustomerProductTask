@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder,FormGroup,Validators} from '@angular/forms';
-import{HttpClient,HttpParams,HttpHeaders}from '@angular/common/http';
-import{Router}from '@angular/router';
-
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -11,36 +10,43 @@ import{Router}from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  customerLoginFormGroup:FormGroup;
-  result: any;
+  loginFormGroup:FormGroup;
+  result:any;
 
-  constructor(private formBuilder:FormBuilder,private http:HttpClient,private router:Router) { }
+  constructor(private formBuilder:FormBuilder, private router:Router,private http:HttpClient) { }
 
   ngOnInit(): void {
-    this.customerLoginFormGroup=this.formBuilder.group({
-    
-      email:['',[Validators.required,Validators.email]],
+    this.loginFormGroup=this.formBuilder.group({
+
+      email:['',Validators.required],
       password:['',Validators.required]
-     
-    });
+
+
+    })
   }
 
-  LoginClicked()
-  {
-    if(this.customerLoginFormGroup.valid){
-      let header=new HttpHeaders();
-      header=header.append('Email',this.customerLoginFormGroup.value.email);
-      header=header.append('Password',this.customerLoginFormGroup.value.password);
-     
-    this.http.get<any>('https://localhost:44303/api/Customer',{headers:header}).subscribe(res=>{
-        console.log(res);
-        this.result=res;
-        sessionStorage.setItem("id",this.result)
-        this.router.navigateByUrl("/ListProduct")
-      });
+
+    loginClick()
+    {
+      
+      
+      this.http.post('https://localhost:44316/api/login',{
+                      Email:this.loginFormGroup.controls.email.value,
+                      Password:this.loginFormGroup.controls.password.value}).subscribe(res=>{
+                      this.result=res;
+                      sessionStorage.setItem("customerid",this.result);
+                      if(this.result!=null)
+                      {
+                        this.router.navigate(['/customer']);
+                      }
+                      else
+                      {
+                        alert("Invalid Email or Password ");
+                      
+                      }
+                    
+                    });
+    
     }
-
-  }
-
 
 }

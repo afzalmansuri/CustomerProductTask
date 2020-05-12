@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder }  from '@angular/forms';
-import {FormsModule,ReactiveFormsModule} from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { FormGroup, FormBuilder,Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -11,60 +9,46 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
-  customerFormGroup:FormGroup;
+  registerFormGroup:FormGroup;
+  result:any;
 
-  constructor(private formBuilder:FormBuilder,private http:HttpClient,private router:Router) { }
+  constructor(private formBuilder:FormBuilder,private router:Router , private http:HttpClient) { }
 
   ngOnInit(): void {
-
-    this.customerFormGroup=this.formBuilder.group({
+    this.registerFormGroup=this.formBuilder.group({
       firstName:['',Validators.required],
       lastName:['',Validators.required],
-      email:['',[Validators.required,Validators.email]],
-      password:['',Validators.required],
-      confirmPassword:['',Validators.required],
-      mobileNumber:['',Validators.maxLength(10),Validators.minLength(10)],
+      mobileNumber:['',[Validators.required,Validators.maxLength(10)]],
+      email:['',Validators.required],
+     gender:['',Validators.required],
+     dateOfBirth:['',Validators.required],
       address:['',Validators.required],
-      gender:['',Validators.required],
-      dob:['',Validators.required]
-    
-      });
+    password:['',Validators.required],
+   
+
+
+
+
+    })
   }
 
-    confirmPass()
-    {
-      if(this.customerFormGroup.controls.password.value===this.customerFormGroup.controls.confirmPassword.value)
-      {
-        console.log("validate");
-        return true;
-      }
-      else
-      {
-        this.customerFormGroup.controls.confirmPassword.setErrors({"invalid":true});
-        console.log("invalid");
-        return false;
-
-      }
-
-    }
-
-
-
-    RegisterCutomer()
+  registerCustomer()
   {
-    this.http.post<any>('https://localhost:44303/api/Customer',{FirstName:this.customerFormGroup.value.firstName,
-      LastName:this.customerFormGroup.value.lastName,
-      MobileNumber:this.customerFormGroup.value.mobileNumber,
-      Email:this.customerFormGroup.value.email,
-      Password:this.customerFormGroup.value.password,
-      Address:this.customerFormGroup.value.address,
-      Gender:this.customerFormGroup.value.gender,
-      DateOfBirth:this.customerFormGroup.value.dob}).subscribe(res=>{
-     
-        console.log(res);
-      
-    });
-    this.router.navigate(['/CustomerLogin']);
-  }
 
+    
+      this.http.post('https://localhost:44319/api/customer',{
+            FirstName:this.registerFormGroup.controls.firstName.value,
+            LastName:this.registerFormGroup.controls.lastName.value,
+            MobileNumber:this.registerFormGroup.controls.mobileNumber.value,
+            Email:this.registerFormGroup.controls.email.value,
+            Password:this.registerFormGroup.controls.password.value,
+              Gender:this.registerFormGroup.controls.gender.value,
+              Address:this.registerFormGroup.controls.address.value,
+              DateOfBirth:this.registerFormGroup.controls.dateOfBirth.value}).subscribe(res=>{
+        this.result=res;
+
+      });
+this.router.navigate(['/login']);
+
+  }
 }

@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CustomerApp.Models
 {
-    public partial class Customers
+    public class Customers
     {
+       
         public int CustomerId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

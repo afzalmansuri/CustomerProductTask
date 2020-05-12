@@ -11,15 +11,14 @@ namespace CustomerApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SearchProductController : ControllerBase
+    public class FilterProductController : ControllerBase
     {
-
         ProductDomain domain = new ProductDomain();
 
         [HttpPost]
         public IActionResult Post(Products products)
         {
-            var prod = this.domain.SearchProduct(products);
+            var prod = this.domain.FilterProduct(products);
             return Ok(prod);
 
 
