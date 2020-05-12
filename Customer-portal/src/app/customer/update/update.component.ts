@@ -54,15 +54,16 @@ export class UpdateComponent implements OnInit {
 
   updateCustomer()
     {
-      var gender=parseInt(this.upadtecustomerFormGroup.controls.gender.value)
-    this.http.put('https://localhost:44319/api/customer',{
+    
+    
+    this.http.put('https://localhost:44361/api/Customer',{
 
       CustomerId:parseInt(this.customerId),
         FirstName:this.upadtecustomerFormGroup.controls.firstName.value,
         LastName:this.upadtecustomerFormGroup.controls.lastName.value,
         MobileNumber:this.upadtecustomerFormGroup.controls.mobileNumber.value,
         Email:this.upadtecustomerFormGroup.controls.email.value,
-        Gender:gender,
+        Gender:this.upadtecustomerFormGroup.controls.gender.value,
           Address:this.upadtecustomerFormGroup.controls.address.value,
           DateOfBirth:this.upadtecustomerFormGroup.controls.dateOfBirth.value }).subscribe(res=>{
             

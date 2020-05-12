@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
     {
       
       
-      this.http.post('https://localhost:44316/api/login',{
+      this.http.post('https://localhost:44361/api/Login',{
                       Email:this.loginFormGroup.controls.email.value,
                       Password:this.loginFormGroup.controls.password.value}).subscribe(res=>{
                       this.result=res;

@@ -16,7 +16,7 @@ export class CustomerComponent implements OnInit {
   ngOnInit(): void {
 
     this.id=sessionStorage.getItem("customerid");
-    this.http.get('https://localhost:44319/api/customer/'+this.id).subscribe(t => {
+    this.http.get('https://localhost:44361/api/Customer/'+this.id).subscribe(t => {
             this.result = t;
         });
   }
@@ -25,7 +25,7 @@ export class CustomerComponent implements OnInit {
 
       deleteCustomer(id:number )
       {
-        this.http.delete('https://localhost:44319/api/customer/'+id).subscribe(t => {
+        this.http.delete('https://localhost:44361/api/Customer/'+id).subscribe(t => {
           this.result = t;
         });
         window.location.reload();

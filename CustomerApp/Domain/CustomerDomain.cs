@@ -18,7 +18,7 @@ namespace CustomerApp.Domain
         public List<Customers> GetCustomer(int id)
         {
 
-            var reader = this.GetReader($"select *from vCustomers where CustomerId='{id}'");
+            var reader = this.GetReader($"select *from customers where CustomerId='{id}'");
             var Customers = new List<Customers>();
             while (reader.Read())
             {

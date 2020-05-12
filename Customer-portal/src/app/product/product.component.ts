@@ -26,7 +26,7 @@ export class ProductComponent implements OnInit {
     })
 
 
-    this.http.get<any>('https://localhost:44319/api/product').subscribe(t => 
+    this.http.get<any>('https://localhost:44361/api/Product').subscribe(t => 
     
            { this.result = t;
             console.log(this.result);
@@ -39,7 +39,7 @@ export class ProductComponent implements OnInit {
 
   SearchProduct()
   {
-    this.http.post('https://localhost:44319/api/searchproduct',{
+    this.http.post('https://localhost:44361/api/SearchProduct',{
         ProductName:this.searchformGroup.controls.searchtext.value
       
       }).subscribe(res=>{this.result=res; 
@@ -51,7 +51,7 @@ export class ProductComponent implements OnInit {
     FilterProduct()
     {
     
-      this.http.post('https://localhost:44319/api/filterproduct',{
+      this.http.post('https://localhost:44361/api/FilterProduct',{
         ProductStatus:this.searchformGroup.controls.filtertext.value}).subscribe(res=>{
           this.result=res;
         

@@ -42,7 +42,8 @@ export class UpdateprodComponent implements OnInit {
   UpdateProduct()
       {
         var price=parseInt(this.updateproductFormGroup.controls.productPrice.value);
-        this.http.put('https://localhost:44319/api/product',{
+        
+        this.http.put('https://localhost:44361/api/Product',{
           ProductId:parseInt(this.productid),
           ProductName:this.updateproductFormGroup.controls.productName.value,
           Brand:this.updateproductFormGroup.controls.productBrand.value,

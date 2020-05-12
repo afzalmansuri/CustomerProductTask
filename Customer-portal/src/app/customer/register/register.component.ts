@@ -36,7 +36,7 @@ export class RegisterComponent implements OnInit {
   {
 
     
-      this.http.post('https://localhost:44319/api/customer',{
+      this.http.post('https://localhost:44361/api/Customer',{
             FirstName:this.registerFormGroup.controls.firstName.value,
             LastName:this.registerFormGroup.controls.lastName.value,
             MobileNumber:this.registerFormGroup.controls.mobileNumber.value,

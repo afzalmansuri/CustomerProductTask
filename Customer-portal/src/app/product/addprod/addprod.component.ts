@@ -33,7 +33,8 @@ export class AddprodComponent implements OnInit {
 
     
       var price=parseInt(this.addproductFormGroup.controls.productPrice.value);
-      this.http.post('https://localhost:44319/api/product',{
+      
+      this.http.post('https://localhost:44361/api/Product',{
         ProductName:this.addproductFormGroup.controls.productName.value,
         Brand:this.addproductFormGroup.controls.productBrand.value,
         ProductPrice:price,
