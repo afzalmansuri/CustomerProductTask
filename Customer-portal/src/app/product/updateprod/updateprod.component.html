@@ -1,4 +1,11 @@
 <div class="container">
+   <button [routerLink]="['/product']" class="btn btn-primary">
+      Home
+     </button>
+        <button [routerLink]="['/customer']" class="btn btn-primary">
+      Profile
+     </button>
+  
 <form [formGroup]="updateproductFormGroup">
 
     
@@ -39,5 +46,6 @@
    
     <button   class="btn btn-primary btn-block" (click)="UpdateProduct()" >Update</button>
    
-    </div></div>
+    </div>
   </form>
+</div>

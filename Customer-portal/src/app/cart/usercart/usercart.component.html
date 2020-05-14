@@ -1,0 +1,30 @@
+<p>usercart works!</p>
+<form [formGroup]="addcartFormGroup">
+    <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light ">
+            <a [routerLink]="['/userproduct']" >
+               <i class="fa fa-home" area-hidden="true" style="font-size: 36px"></i> 
+            </a>
+               
+            <a [routerLink]="['/user']" >
+                  <i class="fa fa-user" area-hidden="true" style="font-size: 36px"></i>
+              
+             </a>
+             <a [routerLink]="['/cart']" >
+                 <i class="fa fa-shopping-cart" area-hidden="true" style="font-size: 36px"></i>
+             </a>
+           
+             <a [routerLink]="['/order']" >
+                  <i class="fa fa-first-order" area-hidden="true" style="font-size: 36px"></i>
+              </a>
+    </nav>
+    <div class="col-md-6 offset-md-3">
+    
+    <div class="form-row">
+        <div class="form-group col-md-6">
+        <label >Quantity</label>
+        <input type="number" class="form-control" formControlName="quantity"  placeholder="Quantity" required>
+      </div>
+      <button  class="btn btn-primary btn-block" (click)="addcart()" >Add to Cart</button>
+</div></div>
+</div></form>

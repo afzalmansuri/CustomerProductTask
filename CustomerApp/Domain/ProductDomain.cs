@@ -34,12 +34,32 @@ namespace CustomerApp.Domain
             return Products;
         }
 
+        public List<Products> GetUserProduct()
+        {
 
-        
+            var reader = this.GetReader("select * from Products");
+
+            var Products = new List<Products>();
+            while (reader.Read())
+            {
+                var products1 = new Products();
+                products1.ProductId = reader.GetInt32(0);
+                products1.ProductName = reader.GetString(1);
+                products1.Brand = reader.GetString(2);
+                products1.ProductPrice = reader.GetInt32(3);
+                
+
+                Products.Add(products1);
+
+            }
+            return Products;
+        }
+
+
 
         public void UpdateProduct(Products products)
         {
-            this.ExecuteNonQuery($"update products set ProductName='{products.ProductName}',Brand='{products.Brand}',ProductPrice={products.ProductPrice},ProductStatus={products.ProductStatus} where ProductId = {products.ProductId}");
+            this.ExecuteNonQuery($"update products set ProductName='{products.ProductName}',Brand='{products.Brand}',ProductPrice={products.ProductPrice},ProductStatus='{products.ProductStatus}' where ProductId = {products.ProductId}");
         }
 
         public void DeleteProduct(int id)
@@ -90,7 +110,7 @@ namespace CustomerApp.Domain
             return products;
         }
 
-
+        
 
     }
 }

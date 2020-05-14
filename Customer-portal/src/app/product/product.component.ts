@@ -64,7 +64,7 @@ export class ProductComponent implements OnInit {
     
     deleteProduct(id:number )
       {
-      this.http.delete('https://localhost:44319/api/product/'+id).subscribe(resp => {
+      this.http.delete('https://localhost:44361/api/product/'+id).subscribe(resp => {
         this.result = resp;
       });
       window.location.reload();

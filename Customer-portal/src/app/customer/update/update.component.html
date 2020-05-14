@@ -1,5 +1,13 @@
 <form [formGroup]="upadtecustomerFormGroup">
     <div class="container">
+    <button [routerLink]="['/product']" class="btn btn-primary">
+      Home
+     </button>
+        <button [routerLink]="['/customer']" class="btn btn-primary">
+      Profile
+     </button>
+    
+   
     
     <div class="col-md-6 offset-md-3">
     
@@ -16,7 +24,7 @@
     
     <div class="form-group col-md-12">
         <label>Mobile Number</label>
-        <input type="number" class="form-control" formControlName="mobileNumber" placeholder="Mobile Number" required> 
+        <input type="text" class="form-control" formControlName="mobileNumber" placeholder="Mobile Number" required> 
       </div>
       <div class="form-group col-md-12">
         <label>Email</label>

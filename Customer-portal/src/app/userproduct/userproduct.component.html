@@ -1,0 +1,74 @@
+<p>userproduct works!</p>
+<form [formGroup]="usersearchformGroup">
+    <div class="form-group mb-4">
+      
+      <input class="form-control mr-sm-3" type="text"  formControlName="search"  (keyup)="SearchProduct()" placeholder="Search Products" >
+          
+    </div>
+    
+      
+    </form>
+  
+   <div class="container">
+      <div class="">
+
+    <nav class="navbar navbar-expand-lg navbar-light ">
+            <a [routerLink]="['/userproduct']" >
+               <i class="fa fa-home" area-hidden="true" style="font-size: 36px"></i> 
+            </a>
+               
+            <a [routerLink]="['/user']" >
+                  <i class="fa fa-user" area-hidden="true" style="font-size: 36px"></i>
+              
+             </a>
+             <a [routerLink]="['/cart']" >
+                 <i class="fa fa-shopping-cart" area-hidden="true" style="font-size: 36px"></i>
+             </a>
+           
+             <a [routerLink]="['/order']" >
+                  <i class="fa fa-first-order" area-hidden="true" style="font-size: 36px"></i>
+              </a>
+    </nav>
+
+    <div class="col-md-6 ">
+  <table class="table">
+  
+    <thead>
+    <tr>
+      <th colspan="4"><h4>Product List</h4></th>
+      
+  
+    </tr>
+    
+    </thead>
+    
+  
+    
+      <tr>
+        
+        <th scope="col">ProductName</th>
+        <th scope="col">ProductBrand</th>
+        <th scope="col">ProductPrice</th>
+        <th scope="col">Add to Cart</th>
+        
+      </tr>
+   
+    <tr *ngFor="let i of result ">
+    
+      <td scope="col">{{i.productName}}</td>
+      <td scope="col">{{i.brand}}</td>
+      <td scope="col">{{i.productPrice}}</td>
+      
+  
+       <td><a [routerLink]="['/addcart',i.productId]"><i class="fa fa-shopping-cart"></i></a></td>
+       
+      
+      
+      
+    
+      
+    </tr>
+  </table>
+    </div>
+      </div></div>
+  

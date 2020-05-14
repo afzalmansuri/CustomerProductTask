@@ -34,6 +34,7 @@ export class UpdateComponent implements OnInit {
    this.dateofbirth=this.activateRoute.snapshot.paramMap.get("dateofbirth");
    this.address=this.activateRoute.snapshot.paramMap.get("address");
 
+   console.log(this.customerId,this.firstName,this.lastName,this.mobileNumber,this.email,this.gender,this.dateofbirth,this.address);
     this.upadtecustomerFormGroup=this.formBuilder.group({
       
       

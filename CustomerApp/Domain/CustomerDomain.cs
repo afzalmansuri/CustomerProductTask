@@ -12,7 +12,7 @@ namespace CustomerApp.Domain
 
         public void AddCustomer(Customers customers)
         {
-            this.ExecuteNonQuery($"insert into customers values ('{customers.FirstName}','{customers.LastName}','{customers.Email}','{customers.Password}','{customers.MobileNumber}','{customers.Gender}','{customers.Address}','{customers.DateOfBirth}')");
+            this.ExecuteNonQuery($"insert into customers values ('{customers.FirstName}','{customers.LastName}','{customers.Email}','{customers.Password}','{customers.MobileNumber}','{customers.Gender}','{customers.Address}',convert(date,'{customers.DateOfBirth}',104)    )");
         }
 
         public List<Customers> GetCustomer(int id)
@@ -60,7 +60,7 @@ namespace CustomerApp.Domain
        
         public void UpdateCustomer(Customers customers)
         {
-            this.ExecuteNonQuery($"update customers set FirstName='{customers.FirstName}',LastName='{customers.LastName}',MobileNumber={customers.MobileNumber},Email='{customers.Email}',Password='{customers.Password}',DateOfBirth='{customers.DateOfBirth}',Address='{customers.Address}',Gender='{customers.Gender}' where CustomerId = {customers.CustomerId}");
+            this.ExecuteNonQuery($"update customers set FirstName='{customers.FirstName}',LastName='{customers.LastName}',MobileNumber='{customers.MobileNumber}',Email='{customers.Email}',Password='{customers.Password}',DateOfBirth='{customers.DateOfBirth}',Address='{customers.Address}',Gender='{customers.Gender}' where CustomerId = {customers.CustomerId}");
         }
         public void DeleteCustomer(int id)
         {
